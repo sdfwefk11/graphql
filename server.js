@@ -26,7 +26,6 @@ const typeDefs = gql`
   type Query {
     allTweets: [Tweet!]!
     tweet(id: ID!): Tweet
-    ping: String!
   }
   type Mutation {
     postTweet(text: String!, userId: ID!): Tweet!
@@ -38,6 +37,9 @@ const resolvers = {
   Query: {
     allTweets() {
       return tweets;
+    },
+    tweet(root, { id }) {
+      return tweets.find((tweet) => tweet.id === id);
     },
   },
 };
